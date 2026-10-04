@@ -18,6 +18,10 @@ This guide covers the steps to:
 
 ![Architecture diagram](k8s-kind-voting-app.png)
 
+## Argocd
+<img width="1919" height="917" alt="Screenshot 2026-09-26 181749" src="https://github.com/user-attachments/assets/877f1afd-996b-4db1-b49e-14f4307ef06f" />
+
+
 ## Observability
 
 ![Grafana diagram](grafana.png)
@@ -55,6 +59,4 @@ Achieved seamless scaling and high availability, supporting 99.9% uptime for cri
 This project description emphasizes your role in leveraging AWS EC2, Kubernetes, and Argo CD to optimize application deployment and management processes effectively.
 
 
-### Aapke DevOps Wale Bhaiya
-### [TrainWithShubham](https://www.trainwithshubham.com/)
 
