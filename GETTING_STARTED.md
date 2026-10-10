@@ -362,6 +362,11 @@ kubectl port-forward svc/kind-prometheus-grafana -n monitoring 3000:80 --address
 | 🔥 **Prometheus** | `http://<EC2-PUBLIC-IP>:9090` |
 | 📊 **Grafana** | `http://<EC2-PUBLIC-IP>:3000` |
 
+<img width="1899" height="913" alt="Screenshot 2026-09-26 193656" src="https://github.com/user-attachments/assets/3dc11cf0-1986-43e4-b911-8e6e1d794f97" />
+<img width="974" height="666" alt="Screenshot 2026-09-26 194610" src="https://github.com/user-attachments/assets/0cb284bf-8d04-4609-be80-f05837544cd7" />
+<img width="1919" height="902" alt="Screenshot 2026-09-26 195221" src="https://github.com/user-attachments/assets/d6c8aed9-10c6-424a-a610-cb2e66a8346e" />
+
+
 > 🔓 Open ports **9090** and **3000** in your EC2 inbound rules.
 
 ### Grafana Login Credentials
