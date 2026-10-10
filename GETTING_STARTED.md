@@ -30,6 +30,8 @@ A complete step-by-step guide to set up the K8s Kind Voting App from scratch on 
   - `3000` — Grafana
   - `5000` — Vote App
   - `5001` — Result App
+ 
+
 
 ### Install Docker
 
@@ -104,6 +106,9 @@ kind create cluster --config=config.yml --name=shiva-cluster
 ```
 
 > ✅ Verify: `kubectl get nodes`
+
+<img width="651" height="91" alt="Screenshot 2026-09-22 185339" src="https://github.com/user-attachments/assets/6e594ee1-f20a-48da-a2c5-f7da179a9b4d" />
+
 
 ---
 
@@ -185,6 +190,8 @@ Open your browser: `https://<EC2-PUBLIC-IP>:8443`
 kubectl get secret -n argocd argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && echo
 ```
+<img width="1919" height="917" alt="Screenshot 2026-09-26 181749" src="https://github.com/user-attachments/assets/7c141dcb-54b8-43f2-b9ec-e716ebebd3f4" />
+
 
 ### Configure Argo CD for GitOps
 
@@ -194,6 +201,11 @@ kubectl get secret -n argocd argocd-initial-admin-secret \
 4. Set **sync policy** to `Automatic`
 
 > 💡 **Live scaling demo:** Change the replica count from `1` to `3` in any deployment YAML, push to Git, then refresh the Argo CD UI — you'll see the pods scale up in real time!
+
+<img width="924" height="531" alt="Screenshot 2026-09-26 183548" src="https://github.com/user-attachments/assets/d33d2853-5e64-44af-9bb8-10edaa877353" />
+<img width="919" height="562" alt="Screenshot 2026-09-26 183335" src="https://github.com/user-attachments/assets/63f13d3a-3f29-4a07-9b61-9cce026ca7d4" />
+<img width="1919" height="904" alt="Screenshot 2026-09-26 183114" src="https://github.com/user-attachments/assets/8c20eadf-7096-4970-8350-e1121e436986" />
+
 
 ### Deploy the Voting App via kubectl (alternatively)
 
@@ -218,6 +230,10 @@ kubectl port-forward svc/result 5001:5001 --address=0.0.0.0 &
 |---|---|
 | 🗳️ **Vote App** | `http://<EC2-PUBLIC-IP>:5000` |
 | 📊 **Result App** | `http://<EC2-PUBLIC-IP>:5001` |
+
+<img width="871" height="834" alt="Screenshot 2026-09-26 184844" src="https://github.com/user-attachments/assets/02ad5972-182c-4d92-9a0f-0b7b8154095d" />
+<img width="1470" height="743" alt="Screenshot 2026-09-26 184830" src="https://github.com/user-attachments/assets/3a01e715-a475-4532-b7d0-f89d33cec0e3" />
+
 
 > 🔓 Make sure ports **5000** and **5001** are open in your EC2 inbound rules.
 
@@ -279,6 +295,10 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 Open: `https://<EC2-PUBLIC-IP>:8080`  
 Paste the token from the command above to log in.
+
+<img width="1670" height="620" alt="Screenshot 2026-09-26 190245" src="https://github.com/user-attachments/assets/e3ecebf8-8e4f-46b8-b6d8-980b4940abbf" />
+<img width="1919" height="908" alt="Screenshot 2026-09-26 190317" src="https://github.com/user-attachments/assets/b79dac44-a2a7-4129-8d80-8913c62b7a78" />
+
 
 > 🔓 Make sure **port 8080** is open in your EC2 inbound rules.
 
@@ -385,6 +405,7 @@ kind delete cluster --name=shiva-cluster
 
 ## 🔓 EC2 Inbound Ports Summary
 
+
 | Port | Service |
 |---|---|
 | `5000` | Vote App |
@@ -394,7 +415,15 @@ kind delete cluster --name=shiva-cluster
 | `9090` | Prometheus |
 | `3000` | Grafana |
 
+<img width="1779" height="787" alt="Screenshot 2026-09-26 194402" src="https://github.com/user-attachments/assets/7abecaa9-1576-4382-aaad-4efda787bbff" />
 ---
+
+
+## Some Screenshot
+<img width="871" height="834" alt="Screenshot 2026-09-26 184844" src="https://github.com/user-attachments/assets/08a5ad47-3487-4ffd-9626-e1afc7003e64" />
+
+
+
 
 <div align="center">
   <strong>Happy Shipping! 🚢 — Built with Kubernetes, Kind, Argo CD, Prometheus & Grafana</strong>
