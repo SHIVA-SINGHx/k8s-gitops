@@ -1,8 +1,36 @@
-# 🗳️ K8s Kind Voting App
+# 🗳️ K8s GitOps Voting App
+
+![App Overview](k8s-kind-voting-app.png)
+
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Kind%20v1.30-326CE5?logo=kubernetes&logoColor=white)
+![Argo CD](https://img.shields.io/badge/GitOps-Argo%20CD-EF7B4D?logo=argo&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-E6522C?logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Dashboards-Grafana-F46800?logo=grafana&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/Host-AWS%20EC2-FF9900?logo=amazonaws&logoColor=white)
 
 A **cloud-native, microservices-based voting application** deployed on a local Kubernetes cluster using **Kind (Kubernetes IN Docker)**. This project demonstrates real-world Kubernetes patterns including multi-service orchestration, GitOps with Argo CD, and full-stack observability with Prometheus & Grafana — all running on an AWS EC2 instance.
 
-![App Overview](k8s-kind-voting-app.png)
+---
+
+## Why This Project
+
+Deploying a multi-service application by hand (running `kubectl apply` from a laptop and hoping nothing drifts) does not scale and leaves no audit trail. This project solves that by treating Git as the single source of truth.
+
+| Problem | Approach |
+|---------|----------|
+| Manual, error-prone deployments | Declarative Kubernetes manifests, synced automatically by Argo CD |
+| Cluster state drifting from what's in the repo | GitOps: Argo CD compares live state against Git and reconciles differences |
+| No visibility into cluster and workload health | Prometheus + Grafana via the kube-prometheus-stack Helm chart |
+| Services starting in the wrong order (worker up before Redis/Postgres) | Retry logic in the worker for both Redis and PostgreSQL connections |
+| Needing a cluster without paying for managed Kubernetes | Kind (Kubernetes IN Docker), 3 nodes on a single EC2 instance |
+
+## Outcomes
+
+- A 5-service, 3-language application (Python, Node.js, .NET) runs on a 3-node cluster from 9 declarative manifests
+- Cluster state is defined in Git and reconciled by Argo CD
+- Cluster and workload metrics are visible in Prometheus and Grafana (see screenshots below)
+- The same app runs locally with Docker Compose and on Kubernetes without code changes
 
 ---
 
@@ -174,11 +202,11 @@ k8s-kind-voting-app/
 
 
 
-### Monitoring Screenshots
+## Monitoring with Prometheus and Grafana
 
-![Prometheus](prometheus.png)
-
-![Grafana Dashboard](grafana.png)
+| Prometheus | Grafana |
+|-----------|---------|
+| ![Prometheus](prometheus.png) | ![Grafana](grafana.png) |
 
 ---
 
@@ -214,32 +242,37 @@ nodes:
     image: kindest/node:v1.30.0
 ```
 
----
-
-## 📸 Screenshots
-
-> _Drop your screenshots into the project folder and update the paths below._
-
-<!-- Voting App UI -->
-<!-- ![Vote App](./screenshots/vote-app.png) -->
-
-<!-- Result App UI -->
-<!-- ![Result App](./screenshots/result-app.png) -->
-
-<!-- Argo CD Dashboard -->
-<!-- ![Argo CD](./screenshots/argocd.png) -->
-
-<!-- Kubernetes Dashboard -->
-<!-- ![K8s Dashboard](./screenshots/k8s-dashboard.png) -->
-
----
-
 ## 🧹 Cleanup
 
 ```bash
 # Delete the Kind cluster (removes all workloads and containers)
 kind delete cluster --name=kind
 ```
+
+## What I Learned
+
+- Writing Kubernetes Deployments and Services for a multi-tier app, and choosing between NodePort and ClusterIP
+- How GitOps replaces manual `kubectl apply` with Git-driven, auditable deployments
+- Handling startup dependencies between services with connection retry logic
+- Setting up cluster observability with Helm, Prometheus, and Grafana
+
+## 📸 Screenshots
+
+<!-- Voting App UI -->
+<!-- ![Vote App](./screenshots/vote-app.png) --><img width="871" height="834" alt="Screenshot 2026-09-26 184844" src="https://github.com/user-attachments/assets/46063b8c-b4c0-43ba-b039-543dbf75fc20" />
+
+
+<!-- Result App UI -->
+<!-- ![Result App](./screenshots/result-app.png) --><img width="1470" height="743" alt="Screenshot 2026-09-26 184830" src="https://github.com/user-attachments/assets/53b94ad7-f6a0-4214-a6d8-03b753c7149a" />
+
+
+<!-- Argo CD Dashboard -->
+<!-- ![Argo CD](./screenshots/argocd.png) --><img width="1919" height="904" alt="Screenshot 2026-09-26 183114" src="https://github.com/user-attachments/assets/c2d80cc2-05ae-4b6b-9f9d-84fcec0e3dfe" />
+
+
+<!-- Kubernetes Dashboard -->
+<!-- ![K8s Dashboard](./screenshots/k8s-dashboard.png) --><img width="1919" height="908" alt="Screenshot 2026-09-26 190317" src="https://github.com/user-attachments/assets/8b7e7227-72a7-4b09-b4dd-aa484dc433b3" />
+
 
 ---
 
@@ -249,11 +282,9 @@ This project is licensed under the terms of the [LICENSE](./LICENSE) file.
 
 ---
 
-<div align="center">
-  <strong>Built with ❤️ using Kubernetes, Docker, Python, Node.js, and .NET</strong>
-</div>
+## Author
 
-
+**Shiva Singh** · [GitHub](https://github.com/SHIVA-SINGHx)
 
 
 
